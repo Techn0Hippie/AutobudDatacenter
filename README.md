@@ -2,53 +2,96 @@
 Application that was designed to run on a raspberry Pi which hosts an API, Database, and Web front end to track and analyze grow data.
 
 Installation:
-Update and upgrade: sudo apt-get update
+
+Update and upgrade: 
+
+sudo apt-get update
+
 sudo apt-get upgrade
+
 Install Nginx: sudo apt-get install nginx
+
 Configure nginx:
-Edit nginx.conf file with the following:
+
 sudo cp default /etc/nginx/sites-enabled/default
+
 Reload nginx: sudo service nginx reload
+
 Install Mariadb: sudo apt install mariadb-server
-Configure DB 
+
+Configure DB:
+
 sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+
 Change bind address line: bind-address = 0.0.0.0
+
 Sudo service mysql restart
+
 Setup the abadmin user:
+
 Sudo mysql 
+
 CREATE DATABASE autobud;
+
 CREATE USER  'abadmin'@'localhost' IDENTIFIED BY 'SOMETHINGSECURE';
+
 GRANT ALL PRIVILEGES ON *.* TO 'abadmin'@'%' IDENTIFIED BY 'SOMETHINGSECURE' WITH GRANT OPTION;
+
 grant all privileges on *.* to abadmin@localhost identified by 'SOMETHINGSECURE';
+
 FLUSH PRIVILEGES;
+
 EXIT;
+
 Restart mysql once more: sudo service mysql restart
+
 Load the default empty autobud database: sudo mysqldump autobud > autobudbak.sql
+
 sudo mysql autobud < autobudbak.sql
+
 Install php-fpm 
+
 sudo apt install php-fpm
+
 Install node red: bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
 
 Install node red packages:
 For API
+
 cd /node-red-1880
+
 sudo npm install node-red-dashboard
+
 sudo npm i node-red-node-mysql
+
 sudo npm i node-red-node-email
+
 For Web
+
 cd /node-red-1881
+
 sudo npm install node-red-dashboard
+
 sudo npm i node-red-node-mysql
+
 sudo npm install node-red-contrib-moment
+
 sudo npm install node-red-node-ui-table
 
 Install image to base64 converter 
+
 sudo apt-get install python3-pip
+
 pip3 install mysql-connector-python-rf
+
 From git pulled abdc directory: sudo cp upload.php /var/www/html/upload.php
+
 From git pulled abdc directory: sudo cp -r uploads /var/www/html/uploads
+
 cd /var/www/html/uploads
+
 sudo chmod +x imguploader.py
+
 If you changed the database user or password, edit the imguploader.py file with the new credentials
 
 Usage and Features:
