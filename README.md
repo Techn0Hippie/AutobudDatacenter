@@ -1,25 +1,25 @@
 # AutobudDatacenter
 Application that was designed to run on a raspberry Pi which hosts an API, Database, and Web front end to track and analyze grow data.
 
-Installation:
+# Installation:
 
-Update and upgrade: 
+**Update and upgrade:** 
 
 sudo apt-get update
 
 sudo apt-get upgrade
 
-Install Nginx: sudo apt-get install nginx
+**Install Nginx:** sudo apt-get install nginx
 
-Configure nginx:
+**Configure nginx:**
 
 sudo cp default /etc/nginx/sites-enabled/default
 
 Reload nginx: sudo service nginx reload
 
-Install Mariadb: sudo apt install mariadb-server
+**Install Mariadb:** sudo apt install mariadb-server
 
-Configure DB:
+**Configure DB:**
 
 sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
 
@@ -27,7 +27,7 @@ Change bind address line: bind-address = 0.0.0.0
 
 Sudo service mysql restart
 
-Setup the abadmin user:
+**Setup the abadmin user:**
 
 Sudo mysql 
 
@@ -49,13 +49,13 @@ Load the default empty autobud database: sudo mysqldump autobud > autobudbak.sql
 
 sudo mysql autobud < autobudbak.sql
 
-Install php-fpm 
+**Install php-fpm** 
 
 sudo apt install php-fpm
 
-Install node red: bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
+**Install node red:** bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
 
-Install node red packages:
+**Install node red packages:**
 For API
 
 cd /node-red-1880
@@ -78,7 +78,7 @@ sudo npm install node-red-contrib-moment
 
 sudo npm install node-red-node-ui-table
 
-Install image to base64 converter 
+**Install image to base64 converter** 
 
 sudo apt-get install python3-pip
 
@@ -94,20 +94,20 @@ sudo chmod +x imguploader.py
 
 If you changed the database user or password, edit the imguploader.py file with the new credentials
 
-Usage and Features:
+# Usage and Features:
 Autobud datacenter is a data collection program that is built to run on a raspberry pi. It consists of 3 parts:
-An API to listen for events
-A mysql database to save event data and log the time of each event (based on when it is posted to the API
-A basic web front end to display the data
+ - An API to listen for events
+ - A mysql database to save event data and log the time of each event (based on when it is posted to the API
+ - A basic web front end to display the data
 
 The program is written in Node-red as it is a lightweight node.js system commonly run on raspberry pis. It can also be deployed on larger servers, but at this point (pre-beta) it is not scalable.
 
 
-Needed fixes:
+## Needed fixes:
 The program also has a small PHP program that will accept .jpg files. When the listener is hit, a .jpg must be sent to the php app (http://[IP]/uploads/) and a post node red API endpoint (http://[IP]:1800/imgupload). Once the post is sent to node red, it exicuts a small python script that converts the .jpg into bas64, writes it to the DB, and deletes the image. 
 An ideal fix would be having these 3 parts of the program written in 3 separate languages, all in the PHP program. I needed a solution quickly and this was a fast and interesting way to use 3 programming languages to complete a task.
 
-Needed adds:
+## Needed adds:
 A full CRUD interface built to manage grows in the database
 
 Better chart reporting
@@ -116,7 +116,7 @@ Basic UI improvements
 
 Other next obvious steps would be a series of python programs that will run locally on the Pi to allow full grow control from the device. I started working on these before I ported the control functions to my ESP based microcontroller. I will work on getting some of this cleaned up and added.
 
-API Info:
+## API Info:
 Autobud Datacenter hosts the following API endpoints:
 
 /imgupload 
@@ -163,7 +163,7 @@ To = email address to send to
 Ip = Email Message text
 
 
-To start Autobud Datacenter run:
+##To start Autobud Datacenter run:
 
 1880: APIs
 sudo node-red -u /node-red-1880 -p 1880 -s /home/pi/abdc/api/settings.js /home/pi/abdc/api/flows_api.json
