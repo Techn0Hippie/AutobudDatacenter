@@ -9,6 +9,20 @@ sudo apt-get update
 
 sudo apt-get upgrade
 
+**Install NGINX:**
+
+sudo apt-get install nginx
+
+sudo cp ~/AutobudDatacenter/abdc/default /etc/nginx/sites-enabled/default
+
+sudo service nginx reload 
+
+**Install git and pull:** 
+sudo apt install git
+
+git clone https://github.com/AutoBudAlpha/AutobudDatacenter
+
+cd ~/AutobudDatacenter/abdc
 
 **Install Mariadb:** sudo apt install mariadb-server
 
@@ -22,7 +36,7 @@ Sudo service mysql restart
 
 **Setup the abadmin user:**
 
-Sudo mysql 
+sudo mysql 
 
 CREATE DATABASE autobud;
 
@@ -38,9 +52,9 @@ EXIT;
 
 Restart mysql once more: sudo service mysql restart
 
-Load the default empty autobud database: sudo mysqldump autobud > autobudbak.sql
+Load the default empty autobud database: 
 
-sudo mysql autobud < autobudbak.sql
+sudo mysql autobud < autobud.sql
 
 **Install php-fpm** 
 
@@ -48,24 +62,18 @@ sudo apt install php-fpm
 
 **Install node red:** bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
 
-**Install node red packages:**
-For API
+sudo systemctl enable nodered.service
 
-cd /node-red-1880
+
+**Install node red packages:**
+
+cd ~/.node-red
 
 sudo npm install node-red-dashboard
 
 sudo npm i node-red-node-mysql
 
 sudo npm i node-red-node-email
-
-For Web
-
-cd /node-red-1881
-
-sudo npm install node-red-dashboard
-
-sudo npm i node-red-node-mysql
 
 sudo npm install node-red-contrib-moment
 
