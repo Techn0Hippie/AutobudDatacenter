@@ -9,13 +9,6 @@ sudo apt-get update
 
 sudo apt-get upgrade
 
-**Install Nginx:** sudo apt-get install nginx
-
-**Configure nginx:**
-
-sudo cp default /etc/nginx/sites-enabled/default
-
-Reload nginx: sudo service nginx reload
 
 **Install Mariadb:** sudo apt install mariadb-server
 
@@ -163,13 +156,7 @@ To = email address to send to
 Ip = Email Message text
 
 
-##To start Autobud Datacenter run:
 
-1880: APIs
-sudo node-red -u /node-red-1880 -p 1880 -s /home/pi/abdc/api/settings.js /home/pi/abdc/api/flows_api.json
-
-1881: Web front end 
-sudo node-red -u /node-red-1881 -p 1881 -s /home/pi/abdc/web/settings.js /home/pi/abdc/web/flows_web.json
 
 
 
