@@ -93,6 +93,8 @@ cd /var/www/html/uploads
 
 sudo chmod +x imguploader.py
 
+sudo chmod 777 /var/www/html/uploads
+
 If you changed the database user or password, edit the imguploader.py file with the new credentials
 
 # Usage and Features:
