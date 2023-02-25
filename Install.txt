@@ -1,0 +1,52 @@
+
+#Pre Req#
+Set up Raspberry Pi with default settings
+
+#UPDATE#
+sudo apt-get update
+sudo apt-get upgrade
+
+#PULL DOWN  GIT FILES
+sudo apt install git
+cd ~
+git clone https://github.com/Techn0Hippie/AutobudDatacenter
+
+#Install and config DB#
+sudo apt install mariadb-server
+- Configure
+	sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+    sudo service mysql restart
+ - Set Up DB
+ 	sudo mysql
+ 	CREATE DATABASE autobud;
+ 	CREATE USER 'abadmin'@'%' IDENTIFIED BY 'SOMETHINGSECURE';
+ 	GRANT ALL ON *.* TO 'abadmin'@'%';
+ 	GRANT ALL ON *.* TO 'abadmin'@'localhost';
+ 	flush privileges;
+ 	exit;
+ 	sudo service mysql restart
+ - Import DB
+ 	cd ~/AutobudDatacenter
+ 	sudo mysql autobud < ABDCschema.sql
+
+#Install Node-Red with Packages
+bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
+sudo systemctl enable nodered.service
+ - Configure
+ 	cd ~/.node-red
+	sudo npm install node-red-dashboard
+	sudo npm i node-red-node-mysql
+	sudo npm install node-red-contrib-moment
+	sudo npm install node-red-node-ui-table
+	sudo npm i node-red-node-email
+
+#Import config
+	reboot pi with sudo reboot
+	After reboot, browse to http://[ADDRESS_OF_PI]:1880/
+	In UI, go to the hamburger dropdown and select import
+	Import the flows.json file from the git repo and deploy
+
+
+
+
+

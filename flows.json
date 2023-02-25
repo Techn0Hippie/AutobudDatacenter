@@ -1,30 +1,4 @@
-Node-RED Deploy
-2/21/2023, 8:49:35 PMnode: d3578ffb1393b1c6
-SELECT GrowDay FROM LabReport WHERE id = '3'ORDER BY GrowDay DESC; : msg.payload : undefined
-undefined
-2/21/2023, 8:49:38 PMnode: Lab Reports
-SELECT * FROM LabReport WHERE GrowDay = '13' and Id = '3' ORDER BY DATE DESC LIMIT 1; : msg.payload : array[1]
-[ object ]
-2/21/2023, 8:51:32 PMnode: LogOutput
-msg.payload : Object
-{ ip: "192.168.3.146", jpeg: "/9j/4AAQSkZJRgABAQAAAQABAAD/2w…", id: "AAAAAA000069", timestamp: "2023-02-22 01:51:31" }
-2/21/2023, 8:51:32 PMnode: Incorrect Time
-msg.payload : Object
-{ ip: "192.168.3.146", jpeg: "/9j/4AAQSkZJRgABAQAAAQABAAD/2w…", id: "69", timestamp: "2023-02-22 01:51:31" }
-2/21/2023, 8:51:35 PMnode: LogOutput
-msg.payload : Object
-{ id: "aaaaaa000069", temp: "72.428", humidity: "30.12" }
-2/21/2023, 8:51:36 PMnode: SQL Statement
-INSERT INTO SensorData (Time, id, Moisture, Temp, Hum) VALUES (now(), 69, 0, 72.428, 30.12); : msg.payload : Object
-{ id: "69", temp: "72.428", humidity: "30.12" }
-2/21/2023, 8:51:37 PMnode: GrowDayCheck
-SELECT GrowDay FROM LabReport WHERE id = '69'ORDER BY GrowDay DESC; : msg.payload : undefined
-undefined
-2/21/2023, 8:51:38 PMnode: Data Update
-function : (error)
-"TypeError: Cannot read property 'GrowDay' of undefined"
-Export nodes
-Export
+
 [
     {
         "id": "4923636ceed817a8",
