@@ -1,4 +1,3 @@
-
 [
     {
         "id": "4923636ceed817a8",
@@ -50,6 +49,14 @@
         "id": "c40b2288adab42ec",
         "type": "tab",
         "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5777d0807adbd031",
+        "type": "tab",
+        "label": "Lab",
         "disabled": false,
         "info": "",
         "env": []
@@ -961,6 +968,70 @@
         "collapse": false
     },
     {
+        "id": "518d3d70c2ddc7b0",
+        "type": "ui_tab",
+        "name": "Lab",
+        "icon": "dashboard",
+        "order": 6,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "b1d2613c60a277e4",
+        "type": "ui_group",
+        "name": "Enclosure 1",
+        "tab": "518d3d70c2ddc7b0",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "923c61454b88bca6",
+        "type": "ui_group",
+        "name": "Enclosure 2",
+        "tab": "518d3d70c2ddc7b0",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "75e91a96e32ce74d",
+        "type": "ui_group",
+        "name": "Enclosure 3",
+        "tab": "518d3d70c2ddc7b0",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0bc938fff811090b",
+        "type": "ui_group",
+        "name": "Enclosure 7",
+        "tab": "518d3d70c2ddc7b0",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9c039d30409ce4dd",
+        "type": "ui_group",
+        "name": "Enclosure 12",
+        "tab": "518d3d70c2ddc7b0",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
         "id": "c4988483202fb8d0",
         "type": "ui_toast",
         "z": "eab51e4cdb5152a3",
@@ -1555,25 +1626,6 @@
         ]
     },
     {
-        "id": "7d55e47e62536319",
-        "type": "function",
-        "z": "4923636ceed817a8",
-        "name": "Sec Check",
-        "func": "\nvar auth = msg.payload.id;\n\nif (auth == 14) {\n    return [msg,null,null];\n    \n}\n\nif (auth == 16) {\n    return [null,msg,null];\n    \n}\n\nelse {\n    return [null,null,null];\n}\n//return msg;",
-        "outputs": 3,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 390,
-        "y": 40,
-        "wires": [
-            [],
-            [],
-            []
-        ]
-    },
-    {
         "id": "389813760cf3e8c8",
         "type": "template",
         "z": "4923636ceed817a8",
@@ -1599,7 +1651,7 @@
         "fieldType": "msg",
         "format": "html",
         "syntax": "mustache",
-        "template": "{\"Id\":3592,\"SensorId\":\"aaaaaa000007\",\"quantization\":12,\"activities_interval\":30,\"debug\":0,\"image_upload\":1,\"exposure\":10,\"model\":\"\",\"retry\":1,\"mode\":1,\"start_time\":\"1100\",\"end_time\":\"0300\",\"url_firmware\":\"\",\"status\":null,\"channel\":69,\"power\":3,\"camera_mask\":\"11111\",\"ParentSensorId\":null,\"nearest_1\":null,\"nearest_2\":null,\"nearest_3\":null,\"acr\":0,\"BatteryTypeId\":2,\"re_battery\":0,\"re_battery_date\":null,\"is_over_active\":0,\"used_amp_hours\":null,\"sensor_mode\":null,\"activeDays\":0}",
+        "template": "{\"Id\":3592,\"SensorId\":\"aaaaaa000007\",\"quantization\":12,\"activities_interval\":30,\"debug\":0,\"image_upload\":1,\"exposure\":500,\"model\":\"\",\"retry\":1,\"mode\":1,\"start_time\":\"1100\",\"end_time\":\"0300\",\"url_firmware\":\"\",\"status\":null,\"channel\":69,\"power\":3,\"camera_mask\":\"11111\",\"ParentSensorId\":null,\"nearest_1\":null,\"nearest_2\":null,\"nearest_3\":null,\"acr\":0,\"BatteryTypeId\":2,\"re_battery\":0,\"re_battery_date\":null,\"is_over_active\":0,\"used_amp_hours\":null,\"sensor_mode\":null,\"activeDays\":0}",
         "output": "json",
         "x": 810,
         "y": 280,
@@ -1732,7 +1784,7 @@
         "finalize": "",
         "libs": [],
         "x": 660,
-        "y": 60,
+        "y": 80,
         "wires": [
             [
                 "3bb46beded47a2f8",
@@ -1751,7 +1803,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1590,
+        "x": 1570,
         "y": 40,
         "wires": [
             []
@@ -2900,6 +2952,288 @@
         ]
     },
     {
+        "id": "040c6f20876b36dc",
+        "type": "http response",
+        "z": "a9d6a1e5.18f9e",
+        "name": "",
+        "x": 650,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "af4806085aa9fb8c",
+        "type": "http in",
+        "z": "a9d6a1e5.18f9e",
+        "name": "",
+        "url": "/abc",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 2000,
+        "wires": [
+            [
+                "50e5d6c0bc19d1f5"
+            ]
+        ]
+    },
+    {
+        "id": "50e5d6c0bc19d1f5",
+        "type": "function",
+        "z": "a9d6a1e5.18f9e",
+        "name": "toBase64",
+        "func": "msg.name = msg.req.files[0].originalname;\n\nif (msg.req.files[0].mimetype.includes('image')) {\n    msg.payload = msg.req.files[0].buffer.toString('base64');\n} else {\n    msg.payload = msg.req.files[0].buffer.toString();\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 2000,
+        "wires": [
+            [
+                "a427dbd041059501",
+                "fa7ae7a17e034fb3"
+            ]
+        ]
+    },
+    {
+        "id": "a427dbd041059501",
+        "type": "function",
+        "z": "a9d6a1e5.18f9e",
+        "name": "",
+        "func": "data = (msg.payload);\nglobal.set(\"ABC\",data);\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 2000,
+        "wires": [
+            [
+                "b5988b3a8cc5514b"
+            ]
+        ]
+    },
+    {
+        "id": "fa7ae7a17e034fb3",
+        "type": "template",
+        "z": "a9d6a1e5.18f9e",
+        "name": "Format HTML",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "<h1 style=\"color: #5e9ca0;\">Image Uploaded</h1>",
+        "x": 500,
+        "y": 2040,
+        "wires": [
+            [
+                "040c6f20876b36dc"
+            ]
+        ]
+    },
+    {
+        "id": "45c0ff744d9a5e4c",
+        "type": "comment",
+        "z": "a9d6a1e5.18f9e",
+        "name": "New ABCam API",
+        "info": "",
+        "x": 180,
+        "y": 1940,
+        "wires": []
+    },
+    {
+        "id": "25442b121c187b46",
+        "type": "http response",
+        "z": "a9d6a1e5.18f9e",
+        "name": "",
+        "x": 590,
+        "y": 2120,
+        "wires": []
+    },
+    {
+        "id": "c6ce476ca5a70ee9",
+        "type": "http in",
+        "z": "a9d6a1e5.18f9e",
+        "name": "",
+        "url": "/abcid",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 2080,
+        "wires": [
+            [
+                "34e7dcef615213fb",
+                "eb5a887d978d3ec8",
+                "d9e979d0ec806bbe"
+            ]
+        ]
+    },
+    {
+        "id": "34e7dcef615213fb",
+        "type": "function",
+        "z": "a9d6a1e5.18f9e",
+        "name": "",
+        "func": "data = (msg.payload);\nglobal.set(\"ABCid\",data);\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 2080,
+        "wires": [
+            [
+                "5985c2eb0ed3d57e"
+            ]
+        ]
+    },
+    {
+        "id": "eb5a887d978d3ec8",
+        "type": "template",
+        "z": "a9d6a1e5.18f9e",
+        "name": "Format HTML",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "<h1 style=\"color: #5e9ca0;\">ID SET</h1>",
+        "x": 440,
+        "y": 2120,
+        "wires": [
+            [
+                "25442b121c187b46"
+            ]
+        ]
+    },
+    {
+        "id": "c2a57985dd6f1904",
+        "type": "mysql",
+        "z": "a9d6a1e5.18f9e",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 750,
+        "y": 2180,
+        "wires": [
+            [
+                "53b7694b8212e42b"
+            ]
+        ]
+    },
+    {
+        "id": "00f4a1e6340042e9",
+        "type": "function",
+        "z": "a9d6a1e5.18f9e",
+        "name": "Data Insert",
+        "func": "dataId = global.get(\"ABCid\");\ndataImg = global.get(\"ABC\");\n\nmsg.topic = \n/*INSERT INTO Status (Id) VALUES (\" + dataId + \");\"*/\n\"INSERT INTO ImgDir (Date, id, ) VALUES (now(), \" + dataId + \", '\" + dataImg + \"');\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 2180,
+        "wires": [
+            [
+                "c2a57985dd6f1904",
+                "f16a0986e0870a39"
+            ]
+        ]
+    },
+    {
+        "id": "53b7694b8212e42b",
+        "type": "function",
+        "z": "a9d6a1e5.18f9e",
+        "name": "Clear Values",
+        "func": "dataABCid = 0;\ndataABC = 0;\n\ndataId = global.get(\"ABCid\");\ndataImg = global.get(\"ABC\");\n\nglobal.set(\"ABCid\",dataABCid);\nglobal.set(\"ABC\",dataABC);\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 2180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f16a0986e0870a39",
+        "type": "debug",
+        "z": "a9d6a1e5.18f9e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 2260,
+        "wires": []
+    },
+    {
+        "id": "d9e979d0ec806bbe",
+        "type": "delay",
+        "z": "a9d6a1e5.18f9e",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 2180,
+        "wires": [
+            [
+                "00f4a1e6340042e9"
+            ]
+        ]
+    },
+    {
+        "id": "5985c2eb0ed3d57e",
+        "type": "debug",
+        "z": "a9d6a1e5.18f9e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 2060,
+        "wires": []
+    },
+    {
+        "id": "b5988b3a8cc5514b",
+        "type": "debug",
+        "z": "a9d6a1e5.18f9e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 2000,
+        "wires": []
+    },
+    {
         "id": "87bd278639930640",
         "type": "mysql",
         "z": "f739ade423c85ba0",
@@ -3748,8 +4082,8 @@
         "dot": false,
         "ymin": "60",
         "ymax": "95",
-        "removeOlder": "75",
-        "removeOlderPoints": "4000",
+        "removeOlder": "7",
+        "removeOlderPoints": "50",
         "removeOlderUnit": "86400",
         "cutout": 0,
         "useOneColor": false,
@@ -3851,8 +4185,8 @@
         "dot": false,
         "ymin": "10",
         "ymax": "90",
-        "removeOlder": "75",
-        "removeOlderPoints": "4000",
+        "removeOlder": "7",
+        "removeOlderPoints": "50",
         "removeOlderUnit": "86400",
         "cutout": 0,
         "useOneColor": false,
@@ -4182,8 +4516,8 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 810,
-        "y": 400,
+        "x": 1510,
+        "y": 320,
         "wires": [
             []
         ]
@@ -4525,8 +4859,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 840,
-        "y": 720,
+        "x": 1500,
+        "y": 280,
         "wires": [
             []
         ]
@@ -4543,8 +4877,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1490,
-        "y": 1240,
+        "x": 1450,
+        "y": 1180,
         "wires": []
     },
     {
@@ -7643,7 +7977,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1490,
-        "y": 200,
+        "y": 220,
         "wires": []
     },
     {
@@ -7896,8 +8230,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 1400,
-        "y": 700,
+        "x": 1360,
+        "y": 680,
         "wires": [
             []
         ]
@@ -8925,6 +9259,1701 @@
         "wires": [
             [
                 "a4654193.3b49e8"
+            ]
+        ]
+    },
+    {
+        "id": "ba0a1d9cd1dc7ac9",
+        "type": "template",
+        "z": "5777d0807adbd031",
+        "name": "E1 Grow Data",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": " \nselect * from Grows where id = 1",
+        "output": "str",
+        "x": 280,
+        "y": 160,
+        "wires": [
+            [
+                "bc59872cd483fe4d"
+            ]
+        ]
+    },
+    {
+        "id": "f57cda6de93e1204",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "b1d2613c60a277e4",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "Grow Day",
+        "label": "Grow Day",
+        "format": "{{msg.payload[0].GrowDay}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 620,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "bb0c5626a3b896a2",
+        "type": "comment",
+        "z": "5777d0807adbd031",
+        "name": "Enclosure 1",
+        "info": "",
+        "x": 90,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "f9939e90b64d8efa",
+        "type": "function",
+        "z": "5777d0807adbd031",
+        "name": "Convert",
+        "func": "data = msg.payload[0].img;\nmsg.payload = data\nvar m = {\n topic : \"( + data + )\"     \n };\nreturn msg;\n//INSERT INTO `Perams` (`notify')               VALUES (\"+email\",\"+ temp +\")\"",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 500,
+        "wires": [
+            [
+                "d9de598b0cd63956"
+            ]
+        ]
+    },
+    {
+        "id": "d9de598b0cd63956",
+        "type": "ui_template",
+        "z": "5777d0807adbd031",
+        "group": "b1d2613c60a277e4",
+        "name": "Image",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "format": "<div height=\"350\" style=\"height: 350px;\">\n<img src=data:image/jpeg;base64,{{msg.payload}} width=\"450\"><br/>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 610,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bc59872cd483fe4d",
+        "type": "mysql",
+        "z": "5777d0807adbd031",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 450,
+        "y": 160,
+        "wires": [
+            [
+                "5b03bafd945e7be2",
+                "f57cda6de93e1204",
+                "08e7fdd49a98e7a0",
+                "ec56a9fbe9aa6bea",
+                "bf1e43ba96f442e1"
+            ]
+        ]
+    },
+    {
+        "id": "5b03bafd945e7be2",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "b1d2613c60a277e4",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Genetics",
+        "label": "Genetics",
+        "format": "{{msg.payload[0].Genetics}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 620,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "bf1e43ba96f442e1",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "b1d2613c60a277e4",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "Medium",
+        "label": "Medium",
+        "format": "{{msg.payload[0].Soil}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 620,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "294fb7ea46d479f3",
+        "type": "inject",
+        "z": "5777d0807adbd031",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 90,
+        "y": 160,
+        "wires": [
+            [
+                "ba0a1d9cd1dc7ac9",
+                "575a34193a5d3403",
+                "1984f7b9262e3fa2"
+            ]
+        ]
+    },
+    {
+        "id": "e77431ba02199172",
+        "type": "ui_gauge",
+        "z": "5777d0807adbd031",
+        "name": "Temp",
+        "group": "b1d2613c60a277e4",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Enclosure Temp",
+        "label": "%",
+        "format": "{{msg.payload[0].Temp}}",
+        "min": "50",
+        "max": "95",
+        "colors": [
+            "#0084ff",
+            "#77e600",
+            "#ff0000"
+        ],
+        "seg1": "65",
+        "seg2": "84",
+        "className": "",
+        "x": 610,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "3c013ee2a09c02bf",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "b1d2613c60a277e4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Last Update",
+        "label": "Last Update",
+        "format": "{{msg.payload[0].Time}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 630,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "df3d6bd0d4cf37f2",
+        "type": "ui_gauge",
+        "z": "5777d0807adbd031",
+        "name": "Humidity",
+        "group": "b1d2613c60a277e4",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Enclosure Humidity",
+        "label": "%",
+        "format": "{{msg.payload[0].Hum}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ff0000",
+            "#77e600",
+            "#ff0000"
+        ],
+        "seg1": "25",
+        "seg2": "60",
+        "className": "",
+        "x": 620,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "08e7fdd49a98e7a0",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "b1d2613c60a277e4",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "DaysInVeg",
+        "label": "Days In Veg",
+        "format": "{{msg.payload[0].DaysInVeg}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 630,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "ec56a9fbe9aa6bea",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "b1d2613c60a277e4",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "DaysInFlower",
+        "label": "Days In Flower",
+        "format": "{{msg.payload[0].DaysInFlower}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 640,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "575a34193a5d3403",
+        "type": "template",
+        "z": "5777d0807adbd031",
+        "name": "E1 Sensor Data",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": " \nselect * from SensorData where id = 1 order by Time desc limit 1",
+        "output": "str",
+        "x": 280,
+        "y": 340,
+        "wires": [
+            [
+                "a3b425b6a9ba9886"
+            ]
+        ]
+    },
+    {
+        "id": "a3b425b6a9ba9886",
+        "type": "mysql",
+        "z": "5777d0807adbd031",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 450,
+        "y": 340,
+        "wires": [
+            [
+                "df3d6bd0d4cf37f2",
+                "e77431ba02199172",
+                "3c013ee2a09c02bf"
+            ]
+        ]
+    },
+    {
+        "id": "1984f7b9262e3fa2",
+        "type": "template",
+        "z": "5777d0807adbd031",
+        "name": "E1 Image Data",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": " \nselect img from ImgDir where id = 1 order by Date desc limit 1",
+        "output": "str",
+        "x": 280,
+        "y": 460,
+        "wires": [
+            [
+                "d05be2110156c1ce"
+            ]
+        ]
+    },
+    {
+        "id": "d05be2110156c1ce",
+        "type": "mysql",
+        "z": "5777d0807adbd031",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 450,
+        "y": 460,
+        "wires": [
+            [
+                "f9939e90b64d8efa"
+            ]
+        ]
+    },
+    {
+        "id": "f3c335f09249f13c",
+        "type": "template",
+        "z": "5777d0807adbd031",
+        "name": "E2 Grow Data",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": " \nselect * from Grows where id = 2",
+        "output": "str",
+        "x": 1100,
+        "y": 160,
+        "wires": [
+            [
+                "a482cc68a84dbf49"
+            ]
+        ]
+    },
+    {
+        "id": "1d22e01e19d21d68",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "923c61454b88bca6",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "Grow Day",
+        "label": "Grow Day",
+        "format": "{{msg.payload[0].GrowDay}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 1440,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "fdfd39bd8a8f50f8",
+        "type": "comment",
+        "z": "5777d0807adbd031",
+        "name": "Enclosure 2",
+        "info": "",
+        "x": 910,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "e6ab4fe2c7f6a7ea",
+        "type": "function",
+        "z": "5777d0807adbd031",
+        "name": "Convert",
+        "func": "data = msg.payload[0].img;\nmsg.payload = data\nvar m = {\n topic : \"( + data + )\"     \n };\nreturn msg;\n//INSERT INTO `Perams` (`notify')               VALUES (\"+email\",\"+ temp +\")\"",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1280,
+        "y": 500,
+        "wires": [
+            [
+                "a5b717aa967a1a0d"
+            ]
+        ]
+    },
+    {
+        "id": "a5b717aa967a1a0d",
+        "type": "ui_template",
+        "z": "5777d0807adbd031",
+        "group": "923c61454b88bca6",
+        "name": "Image",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "format": "<div height=\"350\" style=\"height: 350px;\">\n<img src=data:image/jpeg;base64,{{msg.payload}} width=\"450\"><br/>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1430,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a482cc68a84dbf49",
+        "type": "mysql",
+        "z": "5777d0807adbd031",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 1270,
+        "y": 160,
+        "wires": [
+            [
+                "c7dc2873dd49c7ac",
+                "1d22e01e19d21d68",
+                "ffc701d87e1f5491",
+                "218d09691482ae74",
+                "b6a809af74f00081"
+            ]
+        ]
+    },
+    {
+        "id": "c7dc2873dd49c7ac",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "923c61454b88bca6",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Genetics",
+        "label": "Genetics",
+        "format": "{{msg.payload[0].Genetics}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 1440,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "b6a809af74f00081",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "923c61454b88bca6",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "Medium",
+        "label": "Medium",
+        "format": "{{msg.payload[0].Soil}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 1440,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "53943575597803c6",
+        "type": "inject",
+        "z": "5777d0807adbd031",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 910,
+        "y": 160,
+        "wires": [
+            [
+                "f3c335f09249f13c",
+                "395fbe2cfee44a0e",
+                "d63f88aa6e73e012"
+            ]
+        ]
+    },
+    {
+        "id": "f6e9382096168afb",
+        "type": "ui_gauge",
+        "z": "5777d0807adbd031",
+        "name": "Temp",
+        "group": "923c61454b88bca6",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Enclosure Temp",
+        "label": "%",
+        "format": "{{msg.payload[0].Temp}}",
+        "min": "50",
+        "max": "95",
+        "colors": [
+            "#0084ff",
+            "#77e600",
+            "#ff0000"
+        ],
+        "seg1": "65",
+        "seg2": "84",
+        "className": "",
+        "x": 1430,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "b35c0868386310d9",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "923c61454b88bca6",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Last Update",
+        "label": "Last Update",
+        "format": "{{msg.payload[0].Time}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 1450,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "1f0784964b47e59b",
+        "type": "ui_gauge",
+        "z": "5777d0807adbd031",
+        "name": "Humidity",
+        "group": "923c61454b88bca6",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Enclosure Humidity",
+        "label": "%",
+        "format": "{{msg.payload[0].Hum}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ff0000",
+            "#77e600",
+            "#ff0000"
+        ],
+        "seg1": "25",
+        "seg2": "60",
+        "className": "",
+        "x": 1440,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "ffc701d87e1f5491",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "923c61454b88bca6",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "DaysInVeg",
+        "label": "Days In Veg",
+        "format": "{{msg.payload[0].DaysInVeg}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 1450,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "218d09691482ae74",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "923c61454b88bca6",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "DaysInFlower",
+        "label": "Days In Flower",
+        "format": "{{msg.payload[0].DaysInFlower}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 1460,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "395fbe2cfee44a0e",
+        "type": "template",
+        "z": "5777d0807adbd031",
+        "name": "E2 Sensor Data",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": " \nselect * from SensorData where id = 2 order by Time desc limit 1",
+        "output": "str",
+        "x": 1100,
+        "y": 340,
+        "wires": [
+            [
+                "5a4f949fce065aa6"
+            ]
+        ]
+    },
+    {
+        "id": "5a4f949fce065aa6",
+        "type": "mysql",
+        "z": "5777d0807adbd031",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 1270,
+        "y": 340,
+        "wires": [
+            [
+                "1f0784964b47e59b",
+                "f6e9382096168afb",
+                "b35c0868386310d9"
+            ]
+        ]
+    },
+    {
+        "id": "d63f88aa6e73e012",
+        "type": "template",
+        "z": "5777d0807adbd031",
+        "name": "E2 Image Data",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": " \nselect img from ImgDir where id = 2 order by Date desc limit 1",
+        "output": "str",
+        "x": 1100,
+        "y": 460,
+        "wires": [
+            [
+                "4a43efe50cdee3e8"
+            ]
+        ]
+    },
+    {
+        "id": "4a43efe50cdee3e8",
+        "type": "mysql",
+        "z": "5777d0807adbd031",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 1270,
+        "y": 460,
+        "wires": [
+            [
+                "e6ab4fe2c7f6a7ea"
+            ]
+        ]
+    },
+    {
+        "id": "99ea1e26851c2d29",
+        "type": "template",
+        "z": "5777d0807adbd031",
+        "name": "E3 Grow Data",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": " \nselect * from Grows where id = 3",
+        "output": "str",
+        "x": 280,
+        "y": 680,
+        "wires": [
+            [
+                "6353ddb0a3378114"
+            ]
+        ]
+    },
+    {
+        "id": "bfe94400eeedb81b",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "75e91a96e32ce74d",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "Grow Day",
+        "label": "Grow Day",
+        "format": "{{msg.payload[0].GrowDay}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 620,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "436ec63aa4c85417",
+        "type": "comment",
+        "z": "5777d0807adbd031",
+        "name": "Enclosure 3",
+        "info": "",
+        "x": 90,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "aaac501c864ee4ca",
+        "type": "function",
+        "z": "5777d0807adbd031",
+        "name": "Convert",
+        "func": "data = msg.payload[0].img;\nmsg.payload = data\nvar m = {\n topic : \"( + data + )\"     \n };\nreturn msg;\n//INSERT INTO `Perams` (`notify')               VALUES (\"+email\",\"+ temp +\")\"",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 1020,
+        "wires": [
+            [
+                "28c1a7f63c09f6e4"
+            ]
+        ]
+    },
+    {
+        "id": "28c1a7f63c09f6e4",
+        "type": "ui_template",
+        "z": "5777d0807adbd031",
+        "group": "75e91a96e32ce74d",
+        "name": "Image",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "format": "<div height=\"350\" style=\"height: 350px;\">\n<img src=data:image/jpeg;base64,{{msg.payload}} width=\"450\"><br/>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 610,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6353ddb0a3378114",
+        "type": "mysql",
+        "z": "5777d0807adbd031",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 450,
+        "y": 680,
+        "wires": [
+            [
+                "602b2d3e0df2e88b",
+                "bfe94400eeedb81b",
+                "9f8bc162a85f0153",
+                "044ba350a11fdb5d",
+                "b090bf093326c34f"
+            ]
+        ]
+    },
+    {
+        "id": "602b2d3e0df2e88b",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "75e91a96e32ce74d",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Genetics",
+        "label": "Genetics",
+        "format": "{{msg.payload[0].Genetics}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 620,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "b090bf093326c34f",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "75e91a96e32ce74d",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "Medium",
+        "label": "Medium",
+        "format": "{{msg.payload[0].Soil}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 620,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "fddfdcfb21189a44",
+        "type": "inject",
+        "z": "5777d0807adbd031",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 90,
+        "y": 680,
+        "wires": [
+            [
+                "99ea1e26851c2d29",
+                "9da49f062ed138b0",
+                "e4b923ef5ba70728"
+            ]
+        ]
+    },
+    {
+        "id": "a4c0c7eb94fd7707",
+        "type": "ui_gauge",
+        "z": "5777d0807adbd031",
+        "name": "Temp",
+        "group": "75e91a96e32ce74d",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Enclosure Temp",
+        "label": "%",
+        "format": "{{msg.payload[0].Temp}}",
+        "min": "50",
+        "max": "95",
+        "colors": [
+            "#0084ff",
+            "#77e600",
+            "#ff0000"
+        ],
+        "seg1": "65",
+        "seg2": "84",
+        "className": "",
+        "x": 610,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "b1aa15aeb3810cf8",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "75e91a96e32ce74d",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Last Update",
+        "label": "Last Update",
+        "format": "{{msg.payload[0].Time}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 630,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "1a5c02c206fb7cb2",
+        "type": "ui_gauge",
+        "z": "5777d0807adbd031",
+        "name": "Humidity",
+        "group": "75e91a96e32ce74d",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Enclosure Humidity",
+        "label": "%",
+        "format": "{{msg.payload[0].Hum}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ff0000",
+            "#77e600",
+            "#ff0000"
+        ],
+        "seg1": "25",
+        "seg2": "60",
+        "className": "",
+        "x": 620,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "9f8bc162a85f0153",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "75e91a96e32ce74d",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "DaysInVeg",
+        "label": "Days In Veg",
+        "format": "{{msg.payload[0].DaysInVeg}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 630,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "044ba350a11fdb5d",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "75e91a96e32ce74d",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "DaysInFlower",
+        "label": "Days In Flower",
+        "format": "{{msg.payload[0].DaysInFlower}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 640,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "9da49f062ed138b0",
+        "type": "template",
+        "z": "5777d0807adbd031",
+        "name": "E3 Sensor Data",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": " \nselect * from SensorData where id = 3 order by Time desc limit 1",
+        "output": "str",
+        "x": 280,
+        "y": 860,
+        "wires": [
+            [
+                "6539d21f947442ee"
+            ]
+        ]
+    },
+    {
+        "id": "6539d21f947442ee",
+        "type": "mysql",
+        "z": "5777d0807adbd031",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 450,
+        "y": 860,
+        "wires": [
+            [
+                "1a5c02c206fb7cb2",
+                "a4c0c7eb94fd7707",
+                "b1aa15aeb3810cf8"
+            ]
+        ]
+    },
+    {
+        "id": "e4b923ef5ba70728",
+        "type": "template",
+        "z": "5777d0807adbd031",
+        "name": "E2 Image Data",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": " \nselect img from ImgDir where id = 3 order by Date desc limit 1",
+        "output": "str",
+        "x": 280,
+        "y": 980,
+        "wires": [
+            [
+                "3b083579b1d0c226"
+            ]
+        ]
+    },
+    {
+        "id": "3b083579b1d0c226",
+        "type": "mysql",
+        "z": "5777d0807adbd031",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 450,
+        "y": 980,
+        "wires": [
+            [
+                "aaac501c864ee4ca"
+            ]
+        ]
+    },
+    {
+        "id": "2394bc9aa3ea4d95",
+        "type": "template",
+        "z": "5777d0807adbd031",
+        "name": "E7 Grow Data",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": " \nselect * from Grows where id = 7",
+        "output": "str",
+        "x": 1080,
+        "y": 680,
+        "wires": [
+            [
+                "a74333aa77e7dabd"
+            ]
+        ]
+    },
+    {
+        "id": "4dd27e69050c8f0e",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "0bc938fff811090b",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "Grow Day",
+        "label": "Grow Day",
+        "format": "{{msg.payload[0].GrowDay}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 1420,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "098e085f4cb2fc1f",
+        "type": "comment",
+        "z": "5777d0807adbd031",
+        "name": "Enclosure 7",
+        "info": "",
+        "x": 890,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "b14a9ddd3a567f81",
+        "type": "function",
+        "z": "5777d0807adbd031",
+        "name": "Convert",
+        "func": "data = msg.payload[0].img;\nmsg.payload = data\nvar m = {\n topic : \"( + data + )\"     \n };\nreturn msg;\n//INSERT INTO `Perams` (`notify')               VALUES (\"+email\",\"+ temp +\")\"",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1260,
+        "y": 1020,
+        "wires": [
+            [
+                "b9c9d4d4bca62630"
+            ]
+        ]
+    },
+    {
+        "id": "b9c9d4d4bca62630",
+        "type": "ui_template",
+        "z": "5777d0807adbd031",
+        "group": "0bc938fff811090b",
+        "name": "Image",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "format": "<div height=\"350\" style=\"height: 350px;\">\n<img src=data:image/jpeg;base64,{{msg.payload}} width=\"450\"><br/>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1410,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a74333aa77e7dabd",
+        "type": "mysql",
+        "z": "5777d0807adbd031",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 1250,
+        "y": 680,
+        "wires": [
+            [
+                "97250be0ebd2e372",
+                "4dd27e69050c8f0e",
+                "50854c98cd01064f",
+                "eec2236b82a3ad2b",
+                "501ba300db2812d0"
+            ]
+        ]
+    },
+    {
+        "id": "97250be0ebd2e372",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "0bc938fff811090b",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Genetics",
+        "label": "Genetics",
+        "format": "{{msg.payload[0].Genetics}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 1420,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "501ba300db2812d0",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "0bc938fff811090b",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "Medium",
+        "label": "Medium",
+        "format": "{{msg.payload[0].Soil}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 1420,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "0c46db158065b781",
+        "type": "inject",
+        "z": "5777d0807adbd031",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 890,
+        "y": 680,
+        "wires": [
+            [
+                "2394bc9aa3ea4d95",
+                "8256b1add7259862",
+                "396f65e780ea33f9"
+            ]
+        ]
+    },
+    {
+        "id": "4e3a274e1e0c09f5",
+        "type": "ui_gauge",
+        "z": "5777d0807adbd031",
+        "name": "Temp",
+        "group": "0bc938fff811090b",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Enclosure Temp",
+        "label": "%",
+        "format": "{{msg.payload[0].Temp}}",
+        "min": "50",
+        "max": "95",
+        "colors": [
+            "#0084ff",
+            "#77e600",
+            "#ff0000"
+        ],
+        "seg1": "65",
+        "seg2": "84",
+        "className": "",
+        "x": 1410,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "1008a68ac12f9154",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "0bc938fff811090b",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Last Update",
+        "label": "Last Update",
+        "format": "{{msg.payload[0].Time}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 1430,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "17637d05c702e452",
+        "type": "ui_gauge",
+        "z": "5777d0807adbd031",
+        "name": "Humidity",
+        "group": "0bc938fff811090b",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Enclosure Humidity",
+        "label": "%",
+        "format": "{{msg.payload[0].Hum}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ff0000",
+            "#77e600",
+            "#ff0000"
+        ],
+        "seg1": "25",
+        "seg2": "60",
+        "className": "",
+        "x": 1420,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "50854c98cd01064f",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "0bc938fff811090b",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "DaysInVeg",
+        "label": "Days In Veg",
+        "format": "{{msg.payload[0].DaysInVeg}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 1430,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "eec2236b82a3ad2b",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "0bc938fff811090b",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "DaysInFlower",
+        "label": "Days In Flower",
+        "format": "{{msg.payload[0].DaysInFlower}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 1440,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "8256b1add7259862",
+        "type": "template",
+        "z": "5777d0807adbd031",
+        "name": "E7 Sensor Data",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": " \nselect * from SensorData where id = 7 order by Time desc limit 1",
+        "output": "str",
+        "x": 1080,
+        "y": 860,
+        "wires": [
+            [
+                "2828c27538bb9d1c"
+            ]
+        ]
+    },
+    {
+        "id": "2828c27538bb9d1c",
+        "type": "mysql",
+        "z": "5777d0807adbd031",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 1250,
+        "y": 860,
+        "wires": [
+            [
+                "17637d05c702e452",
+                "4e3a274e1e0c09f5",
+                "1008a68ac12f9154"
+            ]
+        ]
+    },
+    {
+        "id": "396f65e780ea33f9",
+        "type": "template",
+        "z": "5777d0807adbd031",
+        "name": "E7 Image Data",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": " \nselect img from ImgDir where id = 7 order by Date desc limit 1",
+        "output": "str",
+        "x": 1080,
+        "y": 980,
+        "wires": [
+            [
+                "75b2b92c7ad9e7e9"
+            ]
+        ]
+    },
+    {
+        "id": "75b2b92c7ad9e7e9",
+        "type": "mysql",
+        "z": "5777d0807adbd031",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 1250,
+        "y": 980,
+        "wires": [
+            [
+                "b14a9ddd3a567f81"
+            ]
+        ]
+    },
+    {
+        "id": "d1ba530b29ad4d0a",
+        "type": "template",
+        "z": "5777d0807adbd031",
+        "name": "E12 Grow Data",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": " \nselect * from Grows where id = 12",
+        "output": "str",
+        "x": 1860,
+        "y": 160,
+        "wires": [
+            [
+                "06eb681d5b0f0f5d"
+            ]
+        ]
+    },
+    {
+        "id": "bf6a821bcb4705b5",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "9c039d30409ce4dd",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "Grow Day",
+        "label": "Grow Day",
+        "format": "{{msg.payload[0].GrowDay}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 2200,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "f1de675c970cd841",
+        "type": "comment",
+        "z": "5777d0807adbd031",
+        "name": "Enclosure 12",
+        "info": "",
+        "x": 1670,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "e33acd2c687bae3f",
+        "type": "function",
+        "z": "5777d0807adbd031",
+        "name": "Convert",
+        "func": "data = msg.payload[0].img;\nmsg.payload = data\nvar m = {\n topic : \"( + data + )\"     \n };\nreturn msg;\n//INSERT INTO `Perams` (`notify')               VALUES (\"+email\",\"+ temp +\")\"",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 2040,
+        "y": 500,
+        "wires": [
+            [
+                "bb9539cf2946a32a"
+            ]
+        ]
+    },
+    {
+        "id": "bb9539cf2946a32a",
+        "type": "ui_template",
+        "z": "5777d0807adbd031",
+        "group": "9c039d30409ce4dd",
+        "name": "Image",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "format": "<div height=\"350\" style=\"height: 350px;\">\n<img src=data:image/jpeg;base64,{{msg.payload}} width=\"450\"><br/>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 2190,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "06eb681d5b0f0f5d",
+        "type": "mysql",
+        "z": "5777d0807adbd031",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 2030,
+        "y": 160,
+        "wires": [
+            [
+                "229e7dd4898ad6a9",
+                "bf6a821bcb4705b5",
+                "cfba8c4af5106312",
+                "bbcf494423fbcc0b",
+                "62d11a1fd824a946"
+            ]
+        ]
+    },
+    {
+        "id": "229e7dd4898ad6a9",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "9c039d30409ce4dd",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Genetics",
+        "label": "Genetics",
+        "format": "{{msg.payload[0].Genetics}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 2200,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "62d11a1fd824a946",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "9c039d30409ce4dd",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "Medium",
+        "label": "Medium",
+        "format": "{{msg.payload[0].Soil}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 2200,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "6eb83ea4c447f669",
+        "type": "inject",
+        "z": "5777d0807adbd031",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1670,
+        "y": 160,
+        "wires": [
+            [
+                "d1ba530b29ad4d0a",
+                "36d4a024d9336b43",
+                "544d6100e6b6a3af"
+            ]
+        ]
+    },
+    {
+        "id": "0c405fdb7b1f5b6f",
+        "type": "ui_gauge",
+        "z": "5777d0807adbd031",
+        "name": "Temp",
+        "group": "9c039d30409ce4dd",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Enclosure Temp",
+        "label": "%",
+        "format": "{{msg.payload[0].Temp}}",
+        "min": "50",
+        "max": "95",
+        "colors": [
+            "#0084ff",
+            "#77e600",
+            "#ff0000"
+        ],
+        "seg1": "65",
+        "seg2": "84",
+        "className": "",
+        "x": 2190,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "665bf17a1584fee2",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "9c039d30409ce4dd",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Last Update",
+        "label": "Last Update",
+        "format": "{{msg.payload[0].Time}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 2210,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "bb769c5bcbb1c9ea",
+        "type": "ui_gauge",
+        "z": "5777d0807adbd031",
+        "name": "Humidity",
+        "group": "9c039d30409ce4dd",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Enclosure Humidity",
+        "label": "%",
+        "format": "{{msg.payload[0].Hum}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ff0000",
+            "#77e600",
+            "#ff0000"
+        ],
+        "seg1": "25",
+        "seg2": "60",
+        "className": "",
+        "x": 2200,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "cfba8c4af5106312",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "9c039d30409ce4dd",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "DaysInVeg",
+        "label": "Days In Veg",
+        "format": "{{msg.payload[0].DaysInVeg}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 2210,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "bbcf494423fbcc0b",
+        "type": "ui_text",
+        "z": "5777d0807adbd031",
+        "group": "9c039d30409ce4dd",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "DaysInFlower",
+        "label": "Days In Flower",
+        "format": "{{msg.payload[0].DaysInFlower}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 2220,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "36d4a024d9336b43",
+        "type": "template",
+        "z": "5777d0807adbd031",
+        "name": "E12 Sensor Data",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": " \nselect * from SensorData where id = 69 order by Time desc limit 1",
+        "output": "str",
+        "x": 1850,
+        "y": 340,
+        "wires": [
+            [
+                "9645827b97d26d96"
+            ]
+        ]
+    },
+    {
+        "id": "9645827b97d26d96",
+        "type": "mysql",
+        "z": "5777d0807adbd031",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 2030,
+        "y": 340,
+        "wires": [
+            [
+                "bb769c5bcbb1c9ea",
+                "0c405fdb7b1f5b6f",
+                "665bf17a1584fee2"
+            ]
+        ]
+    },
+    {
+        "id": "544d6100e6b6a3af",
+        "type": "template",
+        "z": "5777d0807adbd031",
+        "name": "E12 Image Data",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": " \nselect img from ImgDir where id = 69 order by Date desc limit 1",
+        "output": "str",
+        "x": 1840,
+        "y": 440,
+        "wires": [
+            [
+                "8f423f4b27b45015"
+            ]
+        ]
+    },
+    {
+        "id": "8f423f4b27b45015",
+        "type": "mysql",
+        "z": "5777d0807adbd031",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 2030,
+        "y": 460,
+        "wires": [
+            [
+                "e33acd2c687bae3f"
             ]
         ]
     }
