@@ -116,7 +116,13 @@ CREATE TABLE `LabReport` (
   `PPM` int(11) DEFAULT NULL,
   `Notes` text DEFAULT NULL,
   `H2O` double DEFAULT NULL,
-  `img` longtext DEFAULT NULL
+  `img` longtext DEFAULT NULL,
+  `Nutrient1` varchar(100) DEFAULT NULL,
+  `N1Amt` double DEFAULT NULL,
+  `Nutrient2` varchar(100) DEFAULT NULL,
+  `N2Amt` double DEFAULT NULL,
+  `Nutrient3` varchar(100) DEFAULT NULL,
+  `N3Amt` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -132,6 +138,18 @@ CREATE TABLE `Logs` (
   `Time` datetime DEFAULT NULL,
   `Event` varchar(256) DEFAULT NULL,
   `Amount` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Nutrients`
+--
+
+DROP TABLE IF EXISTS `Nutrients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Nutrients` (
+  `Name` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -218,4 +236,4 @@ CREATE TABLE `WaterEvents` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-21 20:59:25
+-- Dump completed on 2023-04-07 15:54:25
