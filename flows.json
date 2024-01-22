@@ -1,3 +1,6 @@
+Node-RED Deploy
+Export nodes
+Export
 [
     {
         "id": "4923636ceed817a8",
@@ -1241,23 +1244,6 @@
         ]
     },
     {
-        "id": "3c7dee17e10beadd",
-        "type": "debug",
-        "z": "4923636ceed817a8",
-        "name": "LogOutput",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1330,
-        "y": 460,
-        "wires": []
-    },
-    {
         "id": "7b1a324a0357976d",
         "type": "http in",
         "z": "4923636ceed817a8",
@@ -1332,7 +1318,7 @@
         "fieldType": "msg",
         "format": "html",
         "syntax": "mustache",
-        "template": "{\"Id\":3592,\"SensorId\":\"aaaaaa000001\",\"quantization\":12,\"activities_interval\":30,\"debug\":0,\"image_upload\":1,\"exposure\":10,\"model\":\"\",\"retry\":1,\"mode\":2,\"start_time\":\"1100\",\"end_time\":\"0300\",\"url_firmware\":\"\",\"status\":null,\"channel\":69,\"power\":3,\"camera_mask\":\"11111\",\"ParentSensorId\":null,\"nearest_1\":null,\"nearest_2\":null,\"nearest_3\":null,\"acr\":0,\"BatteryTypeId\":2,\"re_battery\":0,\"re_battery_date\":null,\"is_over_active\":0,\"used_amp_hours\":null,\"sensor_mode\":null,\"activeDays\":0}",
+        "template": "{\"Id\":3592,\"SensorId\":\"aa:aa:aa:00:00:01\",\"quantization\":12,\"activities_interval\":30,\"debug\":0,\"image_upload\":1,\"exposure\":10,\"model\":\"\",\"retry\":1,\"mode\":2,\"start_time\":\"1100\",\"end_time\":\"0300\",\"url_firmware\":\"\",\"status\":null,\"channel\":69,\"power\":3,\"camera_mask\":\"11111\",\"ParentSensorId\":null,\"nearest_1\":null,\"nearest_2\":null,\"nearest_3\":null,\"acr\":0,\"BatteryTypeId\":2,\"re_battery\":0,\"re_battery_date\":null,\"is_over_active\":0,\"used_amp_hours\":null,\"sensor_mode\":null,\"activeDays\":0}",
         "output": "json",
         "x": 810,
         "y": 200,
@@ -1358,17 +1344,18 @@
         "type": "function",
         "z": "4923636ceed817a8",
         "name": "Data Insert",
-        "func": "dataId = msg.payload.id;\ndataImg = msg.payload.jpeg;\nmsg.topic = \n/*INSERT INTO Status (Id) VALUES (\" + dataId + \");\"*/\n\"INSERT INTO ImgDir (Date, Id, img) VALUES (now(), \" + dataId + \", '\" + dataImg +\"');\"\nreturn msg;",
+        "func": "dataId = msg.payload.id;\ndataImg = msg.payload.jpeg;\ndataGD = global.get(\"GD_SN\");\nmsg.topic = \n/*INSERT INTO Status (Id) VALUES (\" + dataId + \");\"*/\n\"INSERT INTO ImgDir (Date, Id, img, GD) VALUES (now(), \" + dataId + \", '\" + dataImg + \", '\" + dataGD +\"');\"\nreturn msg;",
         "outputs": 1,
-        "noerr": 0,
+        "noerr": 6,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1070,
-        "y": 640,
+        "x": 1170,
+        "y": 580,
         "wires": [
             [
-                "ef90a29d38d499a7"
+                "ef90a29d38d499a7",
+                "03001c844710b6e2"
             ]
         ]
     },
@@ -1396,8 +1383,7 @@
         "wires": [
             [
                 "88942a4fb451ce47",
-                "36e63a7c40eca8e2",
-                "6b6783ce0703f929"
+                "eee68b813d2509e3"
             ]
         ]
     },
@@ -1443,29 +1429,9 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1590,
-        "y": 580,
+        "x": 1810,
+        "y": 500,
         "wires": []
-    },
-    {
-        "id": "59447dbea83afb8e",
-        "type": "function",
-        "z": "4923636ceed817a8",
-        "name": "Data Insert",
-        "func": "dataId = msg.payload.id;\ndataTemp = msg.payload.temp;\ndataHum = msg.payload.humidity;\nmsg.topic = \n/*INSERT INTO Status (Id) VALUES (\" + dataId + \");\"*/\n\"INSERT INTO SensorData (Time, id, Temp, Hum) VALUES (now(), \" + dataId + \", \" + dataTemp + \", \" + dataHum + \");\"\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 990,
-        "y": 140,
-        "wires": [
-            [
-                "59872db767fd36e8",
-                "8c1c38a930b7c7f2"
-            ]
-        ]
     },
     {
         "id": "59872db767fd36e8",
@@ -1473,11 +1439,12 @@
         "z": "4923636ceed817a8",
         "mydb": "c5ee7d10.742bd",
         "name": "AutoBud DB",
-        "x": 1370,
-        "y": 140,
+        "x": 1030,
+        "y": 100,
         "wires": [
             [
-                "5a3f0716f17b8707"
+                "5a3f0716f17b8707",
+                "ec1900f8f9d00eb5"
             ]
         ]
     },
@@ -1492,8 +1459,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 630,
-        "y": 340,
+        "x": 550,
+        "y": 260,
         "wires": [
             [
                 "8aa0a908ef7b4a83"
@@ -1526,7 +1493,7 @@
                 "t": "change",
                 "p": "payload.id",
                 "pt": "msg",
-                "from": "aaaaaa0000",
+                "from": "aa:aa:aa:00:00:",
                 "fromt": "str",
                 "to": "",
                 "tot": "str"
@@ -1541,37 +1508,8 @@
         "y": 120,
         "wires": [
             [
-                "ff7315e08c2476e6",
-                "59447dbea83afb8e"
-            ]
-        ]
-    },
-    {
-        "id": "36e63a7c40eca8e2",
-        "type": "change",
-        "z": "4923636ceed817a8",
-        "name": "",
-        "rules": [
-            {
-                "t": "change",
-                "p": "payload.id",
-                "pt": "msg",
-                "from": "AAAAAA0000",
-                "fromt": "str",
-                "to": "",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 470,
-        "y": 640,
-        "wires": [
-            [
-                "db96ac17b847e87c"
+                "a6b87407c9a0f30f",
+                "cbfd2030646d39be"
             ]
         ]
     },
@@ -1580,7 +1518,7 @@
         "type": "debug",
         "z": "4923636ceed817a8",
         "name": "Raw Multi Sensor",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1588,8 +1526,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1490,
-        "y": 300,
+        "x": 1810,
+        "y": 240,
         "wires": []
     },
     {
@@ -1602,7 +1540,7 @@
                 "t": "change",
                 "p": "payload.id",
                 "pt": "msg",
-                "from": "AAAAAA0000",
+                "from": "AA:AA:AA:00:00:",
                 "fromt": "str",
                 "to": "",
                 "tot": "str"
@@ -1630,14 +1568,13 @@
         "fieldType": "msg",
         "format": "html",
         "syntax": "mustache",
-        "template": "{\"Id\":3592,\"SensorId\":\"aaaaaa000003\",\"quantization\":12,\"activities_interval\":30,\"debug\":0,\"image_upload\":1,\"exposure\":20,\"model\":\"\",\"retry\":1,\"mode\":1,\"start_time\":\"1100\",\"end_time\":\"0300\",\"url_firmware\":\"\",\"status\":null,\"channel\":69,\"power\":3,\"camera_mask\":\"11111\",\"ParentSensorId\":null,\"nearest_1\":null,\"nearest_2\":null,\"nearest_3\":null,\"acr\":0,\"BatteryTypeId\":2,\"re_battery\":0,\"re_battery_date\":null,\"is_over_active\":0,\"used_amp_hours\":null,\"sensor_mode\":null,\"activeDays\":0}",
+        "template": "{\"Id\":3592,\"SensorId\":\"aa:aa:aa:00:00:03\",\"quantization\":12,\"activities_interval\":30,\"debug\":0,\"image_upload\":1,\"exposure\":20,\"model\":\"\",\"retry\":1,\"mode\":1,\"start_time\":\"1100\",\"end_time\":\"0300\",\"url_firmware\":\"\",\"status\":null,\"channel\":69,\"power\":3,\"camera_mask\":\"11111\",\"ParentSensorId\":null,\"nearest_1\":null,\"nearest_2\":null,\"nearest_3\":null,\"acr\":0,\"BatteryTypeId\":2,\"re_battery\":0,\"re_battery_date\":null,\"is_over_active\":0,\"used_amp_hours\":null,\"sensor_mode\":null,\"activeDays\":0}",
         "output": "json",
         "x": 810,
         "y": 240,
         "wires": [
             [
-                "2e5f50ae3fafb2b4",
-                "3c7dee17e10beadd"
+                "2e5f50ae3fafb2b4"
             ]
         ]
     },
@@ -1687,7 +1624,7 @@
         "fieldType": "msg",
         "format": "html",
         "syntax": "mustache",
-        "template": "{\"Id\":3592,\"SensorId\":\"aaaaaa000007\",\"quantization\":12,\"activities_interval\":30,\"debug\":0,\"image_upload\":1,\"exposure\":10,\"model\":\"\",\"retry\":1,\"mode\":1,\"start_time\":\"1100\",\"end_time\":\"0300\",\"url_firmware\":\"\",\"status\":null,\"channel\":69,\"power\":3,\"camera_mask\":\"11111\",\"ParentSensorId\":null,\"nearest_1\":null,\"nearest_2\":null,\"nearest_3\":null,\"acr\":0,\"BatteryTypeId\":2,\"re_battery\":0,\"re_battery_date\":null,\"is_over_active\":0,\"used_amp_hours\":null,\"sensor_mode\":null,\"activeDays\":0}",
+        "template": "{\"Id\":3592,\"SensorId\":\"aa:aa:aa:00:00:07\",\"quantization\":12,\"activities_interval\":30,\"debug\":0,\"image_upload\":1,\"exposure\":10,\"model\":\"\",\"retry\":1,\"mode\":1,\"start_time\":\"1100\",\"end_time\":\"0300\",\"url_firmware\":\"\",\"status\":null,\"channel\":69,\"power\":3,\"camera_mask\":\"11111\",\"ParentSensorId\":null,\"nearest_1\":null,\"nearest_2\":null,\"nearest_3\":null,\"acr\":0,\"BatteryTypeId\":2,\"re_battery\":0,\"re_battery_date\":null,\"is_over_active\":0,\"used_amp_hours\":null,\"sensor_mode\":null,\"activeDays\":0}",
         "output": "json",
         "x": 810,
         "y": 280,
@@ -1696,23 +1633,6 @@
                 "2e5f50ae3fafb2b4"
             ]
         ]
-    },
-    {
-        "id": "b6f915caeadeed79",
-        "type": "debug",
-        "z": "4923636ceed817a8",
-        "name": "Incorrect Time",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1100,
-        "y": 900,
-        "wires": []
     },
     {
         "id": "21c068226c9603c4",
@@ -1725,69 +1645,14 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 850,
-        "y": 760,
+        "x": 790,
+        "y": 860,
         "wires": [
             [
-                "fade4f45d005389e",
-                "ff7315e08c2476e6",
-                "c7a73324dbdce586"
+                "1f462042e8560fbe"
             ],
-            [
-                "b6f915caeadeed79"
-            ]
+            []
         ]
-    },
-    {
-        "id": "fade4f45d005389e",
-        "type": "debug",
-        "z": "4923636ceed817a8",
-        "name": "MESSAGE",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1090,
-        "y": 780,
-        "wires": []
-    },
-    {
-        "id": "8c1c38a930b7c7f2",
-        "type": "debug",
-        "z": "4923636ceed817a8",
-        "name": "SQL Statement",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1340,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "6b6783ce0703f929",
-        "type": "debug",
-        "z": "4923636ceed817a8",
-        "name": "LogOutput",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 430,
-        "y": 880,
-        "wires": []
     },
     {
         "id": "d792fca0fd979031",
@@ -1798,33 +1663,13 @@
         "fieldType": "msg",
         "format": "html",
         "syntax": "mustache",
-        "template": "{\"Id\":3592,\"SensorId\":\"aaaaaa000069\",\"quantization\":12,\"activities_interval\":30,\"debug\":0,\"image_upload\":1,\"exposure\":10,\"model\":\"\",\"retry\":1,\"mode\":1,\"start_time\":\"1100\",\"end_time\":\"0300\",\"url_firmware\":\"\",\"status\":null,\"channel\":69,\"power\":3,\"camera_mask\":\"11111\",\"ParentSensorId\":null,\"nearest_1\":null,\"nearest_2\":null,\"nearest_3\":null,\"acr\":0,\"BatteryTypeId\":2,\"re_battery\":0,\"re_battery_date\":null,\"is_over_active\":0,\"used_amp_hours\":null,\"sensor_mode\":null,\"activeDays\":0}",
+        "template": "{\"Id\":3592,\"SensorId\":\"aa:aa:aa:00:00:69\",\"quantization\":12,\"activities_interval\":30,\"debug\":0,\"image_upload\":1,\"exposure\":10,\"model\":\"\",\"retry\":1,\"mode\":1,\"start_time\":\"1100\",\"end_time\":\"0300\",\"url_firmware\":\"\",\"status\":null,\"channel\":69,\"power\":3,\"camera_mask\":\"11111\",\"ParentSensorId\":null,\"nearest_1\":null,\"nearest_2\":null,\"nearest_3\":null,\"acr\":0,\"BatteryTypeId\":2,\"re_battery\":0,\"re_battery_date\":null,\"is_over_active\":0,\"used_amp_hours\":null,\"sensor_mode\":null,\"activeDays\":0}",
         "output": "json",
         "x": 810,
         "y": 320,
         "wires": [
             [
                 "2e5f50ae3fafb2b4"
-            ]
-        ]
-    },
-    {
-        "id": "ff7315e08c2476e6",
-        "type": "function",
-        "z": "4923636ceed817a8",
-        "name": "GrowDayCheck",
-        "func": "var grow = msg.payload.id;\ndata = grow;\nvar m = {\n topic : \"SELECT GrowDay FROM Grows WHERE id =  \" + \"'\" + data + \"'\" + \";\"     \n };\nreturn m;\n//INSERT INTO `Perams` (`notify')               VALUES (\"+email\",\"+ temp +\")\"",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 700,
-        "y": 60,
-        "wires": [
-            [
-                "0342fc2d127ac652",
-                "3bb46beded47a2f8"
             ]
         ]
     },
@@ -1839,47 +1684,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1880,
-        "y": 420,
+        "x": 1620,
+        "y": 400,
         "wires": [
             [
                 "7fbd7fa48fd1b8c9"
-            ]
-        ]
-    },
-    {
-        "id": "3bb46beded47a2f8",
-        "type": "debug",
-        "z": "4923636ceed817a8",
-        "name": "GrowDayCheck",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1480,
-        "y": 40,
-        "wires": []
-    },
-    {
-        "id": "bdd59fb879a51606",
-        "type": "function",
-        "z": "4923636ceed817a8",
-        "name": "Data Update GD",
-        "func": "\ndataGD = msg.payload.GrowDay;\nglobal.set(\"GD_SN\",dataGD);\n\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1170,
-        "y": 60,
-        "wires": [
-            [
-                "3bb46beded47a2f8"
             ]
         ]
     },
@@ -1892,7 +1701,7 @@
         "fieldType": "msg",
         "format": "html",
         "syntax": "mustache",
-        "template": "{\"Id\":3592,\"SensorId\":\"aaaaaa000002\",\"quantization\":12,\"activities_interval\":30,\"debug\":0,\"image_upload\":1,\"exposure\":10,\"model\":\"\",\"retry\":1,\"mode\":1,\"start_time\":\"1100\",\"end_time\":\"0300\",\"url_firmware\":\"\",\"status\":null,\"channel\":69,\"power\":3,\"camera_mask\":\"11111\",\"ParentSensorId\":null,\"nearest_1\":null,\"nearest_2\":null,\"nearest_3\":null,\"acr\":0,\"BatteryTypeId\":2,\"re_battery\":0,\"re_battery_date\":null,\"is_over_active\":0,\"used_amp_hours\":null,\"sensor_mode\":null,\"activeDays\":0}",
+        "template": "{\"Id\":3592,\"SensorId\":\"aa:aa:aa:00:00:02\",\"quantization\":12,\"activities_interval\":30,\"debug\":0,\"image_upload\":1,\"exposure\":10,\"model\":\"\",\"retry\":1,\"mode\":1,\"start_time\":\"1100\",\"end_time\":\"0300\",\"url_firmware\":\"\",\"status\":null,\"channel\":69,\"power\":3,\"camera_mask\":\"11111\",\"ParentSensorId\":null,\"nearest_1\":null,\"nearest_2\":null,\"nearest_3\":null,\"acr\":0,\"BatteryTypeId\":2,\"re_battery\":0,\"re_battery_date\":null,\"is_over_active\":0,\"used_amp_hours\":null,\"sensor_mode\":null,\"activeDays\":0}",
         "output": "json",
         "x": 810,
         "y": 360,
@@ -1907,7 +1716,7 @@
         "type": "debug",
         "z": "4923636ceed817a8",
         "name": "Sensor Config Check",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1915,8 +1724,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1460,
-        "y": 220,
+        "x": 1820,
+        "y": 160,
         "wires": []
     },
     {
@@ -1928,7 +1737,7 @@
         "fieldType": "msg",
         "format": "html",
         "syntax": "mustache",
-        "template": "{\"Id\":3592,\"SensorId\":\"aaaaaa000008\",\"quantization\":12,\"activities_interval\":30,\"debug\":0,\"image_upload\":1,\"exposure\":20,\"model\":\"\",\"retry\":1,\"mode\":1,\"start_time\":\"1100\",\"end_time\":\"0300\",\"url_firmware\":\"\",\"status\":null,\"channel\":69,\"power\":3,\"camera_mask\":\"11111\",\"ParentSensorId\":null,\"nearest_1\":null,\"nearest_2\":null,\"nearest_3\":null,\"acr\":0,\"BatteryTypeId\":2,\"re_battery\":0,\"re_battery_date\":null,\"is_over_active\":0,\"used_amp_hours\":null,\"sensor_mode\":null,\"activeDays\":0}",
+        "template": "{\"Id\":3592,\"SensorId\":\"aa:aa:aa:00:00:08\",\"quantization\":12,\"activities_interval\":30,\"debug\":0,\"image_upload\":1,\"exposure\":20,\"model\":\"\",\"retry\":1,\"mode\":1,\"start_time\":\"1100\",\"end_time\":\"0300\",\"url_firmware\":\"\",\"status\":null,\"channel\":69,\"power\":3,\"camera_mask\":\"11111\",\"ParentSensorId\":null,\"nearest_1\":null,\"nearest_2\":null,\"nearest_3\":null,\"acr\":0,\"BatteryTypeId\":2,\"re_battery\":0,\"re_battery_date\":null,\"is_over_active\":0,\"used_amp_hours\":null,\"sensor_mode\":null,\"activeDays\":0}",
         "output": "json",
         "x": 810,
         "y": 400,
@@ -1943,7 +1752,7 @@
         "type": "debug",
         "z": "4923636ceed817a8",
         "name": "Gateway Config Check",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1951,18 +1760,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1450,
-        "y": 260,
-        "wires": []
-    },
-    {
-        "id": "733ccfb2bc62f7c3",
-        "type": "comment",
-        "z": "4923636ceed817a8",
-        "name": "babaaa010863",
-        "info": "Local C1 for office needs config",
-        "x": 1960,
-        "y": 60,
+        "x": 1830,
+        "y": 200,
         "wires": []
     },
     {
@@ -1972,75 +1771,15 @@
         "name": "Data Insert",
         "func": "dataId = msg.payload.id;\ndataTemp = msg.payload.temp;\ndataHum = msg.payload.humidity;\ndataGD = global.get(\"GD_SN\");\nmsg.topic = \n/*INSERT INTO Status (Id) VALUES (\" + dataId + \");\"*/\n\"INSERT INTO SensorData (Time, id, Temp, Hum, GrowDay) VALUES (now(), \" + dataId + \", \" + dataTemp + \", \" + dataHum + \", \" + dataGD + \");\"\nreturn msg;",
         "outputs": 1,
-        "noerr": 0,
+        "noerr": 8,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1210,
-        "y": 100,
+        "x": 790,
+        "y": 120,
         "wires": [
             [
-                "3bb46beded47a2f8",
                 "59872db767fd36e8"
-            ]
-        ]
-    },
-    {
-        "id": "c32b7294e5938a75",
-        "type": "function",
-        "z": "4923636ceed817a8",
-        "name": "Data Insert",
-        "func": "dataId = msg.payload.id;\ndataImg = msg.payload.jpeg;\ndataGD = global.get(\"GD_SN\");\nmsg.topic = \n/*INSERT INTO Status (Id) VALUES (\" + dataId + \");\"*/\n\"INSERT INTO ImgDir (Date, Id, img, GD) VALUES (now(), \" + dataId + \", '\" + dataImg + \", '\" + dataGD + \"');\"\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1210,
-        "y": 580,
-        "wires": [
-            [
-                "ef90a29d38d499a7"
-            ]
-        ]
-    },
-    {
-        "id": "0342fc2d127ac652",
-        "type": "mysql",
-        "z": "4923636ceed817a8",
-        "mydb": "c5ee7d10.742bd",
-        "name": "AutoBud DB",
-        "x": 870,
-        "y": 60,
-        "wires": [
-            [
-                "bdd59fb879a51606",
-                "3bb46beded47a2f8"
-            ]
-        ]
-    },
-    {
-        "id": "9a11fea8b492193c",
-        "type": "delay",
-        "z": "4923636ceed817a8",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 1060,
-        "y": 580,
-        "wires": [
-            [
-                "c32b7294e5938a75"
             ]
         ]
     },
@@ -2061,8 +1800,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 980,
-        "y": 100,
+        "x": 640,
+        "y": 120,
         "wires": [
             [
                 "06e08680ee0415d8"
@@ -2074,7 +1813,7 @@
         "type": "debug",
         "z": "4923636ceed817a8",
         "name": "Value CLEAR",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2082,9 +1821,199 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2050,
-        "y": 420,
+        "x": 1790,
+        "y": 400,
         "wires": []
+    },
+    {
+        "id": "ec1900f8f9d00eb5",
+        "type": "debug",
+        "z": "4923636ceed817a8",
+        "name": "RawInsert",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1800,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ce6be6535c87791d",
+        "type": "mysql",
+        "z": "4923636ceed817a8",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 770,
+        "y": 40,
+        "wires": [
+            [
+                "d6b1a7793e47e7bd"
+            ]
+        ]
+    },
+    {
+        "id": "d6b1a7793e47e7bd",
+        "type": "function",
+        "z": "4923636ceed817a8",
+        "name": "Set Global to Grow Day",
+        "func": "data = (msg.payload[0].GrowDay);\nglobal.set(\"GD_SN\",data);\n",
+        "outputs": 1,
+        "noerr": 2,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1230,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cbfd2030646d39be",
+        "type": "function",
+        "z": "4923636ceed817a8",
+        "name": "GrowDayCheck",
+        "func": "var grow = msg.payload.id;\ndata = grow;\nvar m = {\n topic : \"SELECT GrowDay FROM Grows WHERE id =  \" + \"'\" + data + \"'\" + \";\"     \n };\nreturn m;\n//INSERT INTO `Perams` (`notify')               VALUES (\"+email\",\"+ temp +\")\"",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 40,
+        "wires": [
+            [
+                "ce6be6535c87791d"
+            ]
+        ]
+    },
+    {
+        "id": "d30cea362b66b30d",
+        "type": "mysql",
+        "z": "4923636ceed817a8",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 1170,
+        "y": 640,
+        "wires": [
+            [
+                "19153f71afeb0de6"
+            ]
+        ]
+    },
+    {
+        "id": "19153f71afeb0de6",
+        "type": "function",
+        "z": "4923636ceed817a8",
+        "name": "Set Global to Grow Day",
+        "func": "data = (msg.payload[0].GrowDay);\nglobal.set(\"GD_SN\",data);\n",
+        "outputs": 1,
+        "noerr": 2,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1370,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7ac535ebb9ed49e1",
+        "type": "function",
+        "z": "4923636ceed817a8",
+        "name": "GrowDayCheck",
+        "func": "var grow = msg.payload.id;\ndata = grow;\nvar m = {\n topic : \"SELECT GrowDay FROM Grows WHERE id =  \" + \"'\" + data + \"'\" + \";\"     \n };\nreturn m;\n//INSERT INTO `Perams` (`notify')               VALUES (\"+email\",\"+ temp +\")\"",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 640,
+        "wires": [
+            [
+                "d30cea362b66b30d"
+            ]
+        ]
+    },
+    {
+        "id": "1f462042e8560fbe",
+        "type": "function",
+        "z": "4923636ceed817a8",
+        "name": "Data Insert",
+        "func": "dataId = msg.payload.id;\ndataImg = msg.payload.jpeg;\nmsg.topic = \n/*INSERT INTO Status (Id) VALUES (\" + dataId + \");\"*/\n\"INSERT INTO ImgDir (Date, Id, img) VALUES (now(), \" + dataId + \", '\" + dataImg +\"');\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1170,
+        "y": 520,
+        "wires": [
+            [
+                "ef90a29d38d499a7"
+            ]
+        ]
+    },
+    {
+        "id": "e7bb4e94136697d9",
+        "type": "delay",
+        "z": "4923636ceed817a8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 980,
+        "y": 580,
+        "wires": [
+            [
+                "c7a73324dbdce586"
+            ]
+        ]
+    },
+    {
+        "id": "eee68b813d2509e3",
+        "type": "change",
+        "z": "4923636ceed817a8",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload.id",
+                "pt": "msg",
+                "from": "AA:AA:AA:00:00:",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 640,
+        "wires": [
+            [
+                "db96ac17b847e87c"
+            ]
+        ]
     },
     {
         "id": "f003c708.f1968",
@@ -2633,7 +2562,7 @@
         "name": "Insert (Soil)",
         "func": "dataId = msg.payload.Id;\ndataMsg = msg.payload.msg;\ndataTemp = msg.payload.Temp;\ndataHum = msg.payload.Hum;\nmsg.topic = \n/*INSERT INTO Status (Id) VALUES (\" + dataId + \");\"*/\n\"INSERT INTO SensorData (Time, id, Moisture) VALUES (now(), \" + dataId + \", \" + dataMsg + \");\"\nreturn msg;",
         "outputs": 1,
-        "noerr": 0,
+        "noerr": 6,
         "initialize": "",
         "finalize": "",
         "libs": [],
@@ -3162,8 +3091,8 @@
         "type": "http response",
         "z": "a9d6a1e5.18f9e",
         "name": "",
-        "x": 650,
-        "y": 2040,
+        "x": 590,
+        "y": 2260,
         "wires": []
     },
     {
@@ -3175,8 +3104,8 @@
         "method": "post",
         "upload": true,
         "swaggerDoc": "",
-        "x": 200,
-        "y": 2000,
+        "x": 140,
+        "y": 2220,
         "wires": [
             [
                 "50e5d6c0bc19d1f5"
@@ -3194,8 +3123,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 380,
-        "y": 2000,
+        "x": 320,
+        "y": 2220,
         "wires": [
             [
                 "a427dbd041059501",
@@ -3214,8 +3143,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 640,
-        "y": 2000,
+        "x": 580,
+        "y": 2220,
         "wires": [
             [
                 "b5988b3a8cc5514b"
@@ -3232,8 +3161,8 @@
         "format": "html",
         "syntax": "mustache",
         "template": "<h1 style=\"color: #5e9ca0;\">Image Uploaded</h1>",
-        "x": 500,
-        "y": 2040,
+        "x": 440,
+        "y": 2260,
         "wires": [
             [
                 "040c6f20876b36dc"
@@ -3246,8 +3175,8 @@
         "z": "a9d6a1e5.18f9e",
         "name": "New ABCam API",
         "info": "",
-        "x": 180,
-        "y": 1940,
+        "x": 120,
+        "y": 2160,
         "wires": []
     },
     {
@@ -3255,8 +3184,8 @@
         "type": "http response",
         "z": "a9d6a1e5.18f9e",
         "name": "",
-        "x": 590,
-        "y": 2120,
+        "x": 530,
+        "y": 2340,
         "wires": []
     },
     {
@@ -3268,8 +3197,8 @@
         "method": "post",
         "upload": true,
         "swaggerDoc": "",
-        "x": 210,
-        "y": 2080,
+        "x": 150,
+        "y": 2300,
         "wires": [
             [
                 "34e7dcef615213fb",
@@ -3289,8 +3218,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 420,
-        "y": 2080,
+        "x": 360,
+        "y": 2300,
         "wires": [
             [
                 "5985c2eb0ed3d57e"
@@ -3307,8 +3236,8 @@
         "format": "html",
         "syntax": "mustache",
         "template": "<h1 style=\"color: #5e9ca0;\">ID SET</h1>",
-        "x": 440,
-        "y": 2120,
+        "x": 380,
+        "y": 2340,
         "wires": [
             [
                 "25442b121c187b46"
@@ -3321,8 +3250,8 @@
         "z": "a9d6a1e5.18f9e",
         "mydb": "c5ee7d10.742bd",
         "name": "AutoBud DB",
-        "x": 750,
-        "y": 2180,
+        "x": 690,
+        "y": 2400,
         "wires": [
             [
                 "53b7694b8212e42b"
@@ -3340,8 +3269,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 570,
-        "y": 2180,
+        "x": 510,
+        "y": 2400,
         "wires": [
             [
                 "c2a57985dd6f1904",
@@ -3360,8 +3289,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 970,
-        "y": 2180,
+        "x": 910,
+        "y": 2400,
         "wires": [
             []
         ]
@@ -3378,8 +3307,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 710,
-        "y": 2260,
+        "x": 650,
+        "y": 2480,
         "wires": []
     },
     {
@@ -3399,8 +3328,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 340,
-        "y": 2180,
+        "x": 280,
+        "y": 2400,
         "wires": [
             [
                 "00f4a1e6340042e9"
@@ -3419,8 +3348,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 830,
-        "y": 2060,
+        "x": 770,
+        "y": 2280,
         "wires": []
     },
     {
@@ -3435,8 +3364,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 850,
-        "y": 2000,
+        "x": 790,
+        "y": 2220,
         "wires": []
     },
     {
@@ -3455,6 +3384,114 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "f14cc5e4ef1d9274",
+        "type": "http in",
+        "z": "a9d6a1e5.18f9e",
+        "name": "",
+        "url": "phdata",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 1940,
+        "wires": [
+            [
+                "a948fc65d6693d52",
+                "097cdeacc77b5fc8",
+                "406b927aac38d81b"
+            ]
+        ]
+    },
+    {
+        "id": "e2d5a0b610b759ab",
+        "type": "comment",
+        "z": "a9d6a1e5.18f9e",
+        "name": "Web Listener to handle PH sensors",
+        "info": "",
+        "x": 200,
+        "y": 1900,
+        "wires": []
+    },
+    {
+        "id": "097cdeacc77b5fc8",
+        "type": "function",
+        "z": "a9d6a1e5.18f9e",
+        "name": "Data Insert",
+        "func": "dataId = msg.payload.Id;\ndataMsg = msg.payload.msg;\nmsg.topic = \n/*INSERT INTO Status (Id) VALUES (\" + dataId + \");\"*/\n\"INSERT INTO SensorData (Time, id, Moisture, Type) VALUES (now(), \" + dataId + \", \" + dataMsg + \", \" + \"4\" + \");\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 4,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 1940,
+        "wires": [
+            [
+                "4b69fe7048222261",
+                "406b927aac38d81b"
+            ]
+        ]
+    },
+    {
+        "id": "a948fc65d6693d52",
+        "type": "template",
+        "z": "a9d6a1e5.18f9e",
+        "name": "Format HTML",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "\n{{{payload}}}\n",
+        "x": 280,
+        "y": 2000,
+        "wires": [
+            [
+                "c2a84f669c203d78"
+            ]
+        ]
+    },
+    {
+        "id": "c2a84f669c203d78",
+        "type": "http response",
+        "z": "a9d6a1e5.18f9e",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 450,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "4b69fe7048222261",
+        "type": "mysql",
+        "z": "a9d6a1e5.18f9e",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 770,
+        "y": 1940,
+        "wires": [
+            [
+                "406b927aac38d81b"
+            ]
+        ]
+    },
+    {
+        "id": "406b927aac38d81b",
+        "type": "debug",
+        "z": "a9d6a1e5.18f9e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 2000,
+        "wires": []
     },
     {
         "id": "87bd278639930640",
@@ -5939,7 +5976,8 @@
                 "03c095d030cdfc40",
                 "f55fdd1d3cc1d17a",
                 "f1ae60bbe874cb4f",
-                "580b3862b7318aec"
+                "580b3862b7318aec",
+                "fbe4e59d230c0537"
             ]
         ]
     },
@@ -7650,6 +7688,339 @@
         "y": 1920,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "49049103998eb92d",
+        "type": "function",
+        "z": "5f45bc47afcd40d8",
+        "name": "Sec Check",
+        "func": "\nvar auth = msg.payload[0].isDCManaged;\n\nif (auth == 1) {\n    return [msg,null];\n    \n}\nelse {\n    return [null,msg];\n}\n//return msg;",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 2020,
+        "wires": [
+            [
+                "cdddbd7f8425b296",
+                "e28e9e05f611f520"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "e28e9e05f611f520",
+        "type": "function",
+        "z": "5f45bc47afcd40d8",
+        "name": "Pull Current Grow Day",
+        "func": "data = (msg.payload);\nvar m = {\n topic : \"SELECT GrowDay FROM Grows WHERE Id = 8;\"     \n };\nreturn m;\n//INSERT INTO `Perams` (`notify')               VALUES (\"+email\",\"+ temp +\")\"",
+        "outputs": 1,
+        "noerr": 1,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 2080,
+        "wires": [
+            [
+                "ab02b415bcfa6bc0"
+            ]
+        ]
+    },
+    {
+        "id": "ab02b415bcfa6bc0",
+        "type": "mysql",
+        "z": "5f45bc47afcd40d8",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 1150,
+        "y": 2080,
+        "wires": [
+            [
+                "7d4bf831c38b9890",
+                "e6b62099523a6f3e"
+            ]
+        ]
+    },
+    {
+        "id": "7d4bf831c38b9890",
+        "type": "function",
+        "z": "5f45bc47afcd40d8",
+        "name": "Update Grows",
+        "func": "dataGrowDay = msg.payload[0].GrowDay;\nvar GD = parseInt(dataGrowDay );\ndataGrowDay = (dataGrowDay + 1);\nmsg.topic = \n\"Update Grows SET GrowDay = '\" + dataGrowDay + \"' Where id = 8;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 5,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 2080,
+        "wires": [
+            [
+                "e41e4e951c3dc4e4"
+            ]
+        ]
+    },
+    {
+        "id": "e41e4e951c3dc4e4",
+        "type": "mysql",
+        "z": "5f45bc47afcd40d8",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 1650,
+        "y": 2080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e660f66261f6dd3f",
+        "type": "function",
+        "z": "5f45bc47afcd40d8",
+        "name": "Day Type Selector",
+        "func": "\nvar veg = msg.payload[0].inVeg;\n\nif (veg == 1) {\n    return [msg,null];\n    \n}\nelse {\n    return [null,msg];\n}\n//return msg;",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1290,
+        "y": 2020,
+        "wires": [
+            [
+                "607c626c2367a386"
+            ],
+            [
+                "5cd68ac98972c58f"
+            ]
+        ]
+    },
+    {
+        "id": "cdddbd7f8425b296",
+        "type": "function",
+        "z": "5f45bc47afcd40d8",
+        "name": "Pull Veg/Flower Status",
+        "func": "data = (msg.payload);\nvar m = {\n topic : \"SELECT inVeg FROM Grows WHERE Id = 8;\"     \n };\nreturn m;\n//INSERT INTO `Perams` (`notify')               VALUES (\"+email\",\"+ temp +\")\"",
+        "outputs": 1,
+        "noerr": 1,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 2020,
+        "wires": [
+            [
+                "abb3ed348d641b5a"
+            ]
+        ]
+    },
+    {
+        "id": "abb3ed348d641b5a",
+        "type": "mysql",
+        "z": "5f45bc47afcd40d8",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 1110,
+        "y": 2020,
+        "wires": [
+            [
+                "e660f66261f6dd3f"
+            ]
+        ]
+    },
+    {
+        "id": "2517d09ba737681c",
+        "type": "function",
+        "z": "5f45bc47afcd40d8",
+        "name": "Update Veg Count",
+        "func": "dataVegDay = msg.payload[0].DaysInVeg;\ndataVegDay = (dataVegDay + 1);\nmsg.topic = \n\"Update Grows SET DaysinVeg = '\" + dataVegDay + \"' Where id = 8;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 4,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1910,
+        "y": 1980,
+        "wires": [
+            [
+                "ebec1fba15e7af1e"
+            ]
+        ]
+    },
+    {
+        "id": "607c626c2367a386",
+        "type": "function",
+        "z": "5f45bc47afcd40d8",
+        "name": "Pull Current VegDay",
+        "func": "data = (msg.payload);\nvar m = {\n topic : \"SELECT DaysInVeg FROM Grows WHERE Id = 8;\"     \n };\nreturn m;\n//INSERT INTO `Perams` (`notify')               VALUES (\"+email\",\"+ temp +\")\"",
+        "outputs": 1,
+        "noerr": 1,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1500,
+        "y": 1980,
+        "wires": [
+            [
+                "46b5286f6fc5a960"
+            ]
+        ]
+    },
+    {
+        "id": "5cd68ac98972c58f",
+        "type": "function",
+        "z": "5f45bc47afcd40d8",
+        "name": "Pull Current Flower Day",
+        "func": "data = (msg.payload);\nvar m = {\n topic : \"SELECT DaysInFlower FROM Grows WHERE Id = 8;\"     \n };\nreturn m;\n//INSERT INTO `Perams` (`notify')               VALUES (\"+email\",\"+ temp +\")\"",
+        "outputs": 1,
+        "noerr": 1,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1510,
+        "y": 2040,
+        "wires": [
+            [
+                "974dbe14fb4b8040"
+            ]
+        ]
+    },
+    {
+        "id": "46b5286f6fc5a960",
+        "type": "mysql",
+        "z": "5f45bc47afcd40d8",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 1690,
+        "y": 1980,
+        "wires": [
+            [
+                "2517d09ba737681c"
+            ]
+        ]
+    },
+    {
+        "id": "974dbe14fb4b8040",
+        "type": "mysql",
+        "z": "5f45bc47afcd40d8",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 1710,
+        "y": 2040,
+        "wires": [
+            [
+                "a63cb0cab89ff980"
+            ]
+        ]
+    },
+    {
+        "id": "a63cb0cab89ff980",
+        "type": "function",
+        "z": "5f45bc47afcd40d8",
+        "name": "Update Flower Count",
+        "func": "dataFlowerDay = msg.payload[0].DaysInFlower;\ndataFlowerDay = (dataFlowerDay + 1);\nmsg.topic = \n\"Update Grows SET DaysinFlower = '\" + dataFlowerDay + \"' Where id = 8;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 4,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1920,
+        "y": 2040,
+        "wires": [
+            [
+                "552b41356215e068"
+            ]
+        ]
+    },
+    {
+        "id": "ebec1fba15e7af1e",
+        "type": "mysql",
+        "z": "5f45bc47afcd40d8",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 2130,
+        "y": 1980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "552b41356215e068",
+        "type": "mysql",
+        "z": "5f45bc47afcd40d8",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 2130,
+        "y": 2040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e6b62099523a6f3e",
+        "type": "function",
+        "z": "5f45bc47afcd40d8",
+        "name": "Update DailyLog",
+        "func": "dataGrowDay = msg.payload[0].GrowDay;\nvar GD = parseInt(dataGrowDay );\ndataGrowDay = (dataGrowDay + 1);\ndataIP = '6.6.6.6';\nId = 8;\nmsg.topic = \n\"INSERT INTO DailyLog (Date, Id, GrowDay, Ip) VALUES (now(), \" + Id + \", \" + dataGrowDay + \", \" + \"'\" + dataIP + \"'\" + \");\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 9,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1370,
+        "y": 2120,
+        "wires": [
+            [
+                "c9704b76375a9ac5"
+            ]
+        ]
+    },
+    {
+        "id": "c9704b76375a9ac5",
+        "type": "mysql",
+        "z": "5f45bc47afcd40d8",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 1650,
+        "y": 2120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fbe4e59d230c0537",
+        "type": "function",
+        "z": "5f45bc47afcd40d8",
+        "name": "Check Enclosure 8",
+        "func": "data = (msg.payload);\nvar m = {\n topic : \"SELECT isDCManaged FROM Grows WHERE Id = 8;\"     \n };\nreturn m;\n//INSERT INTO `Perams` (`notify')               VALUES (\"+email\",\"+ temp +\")\"",
+        "outputs": 1,
+        "noerr": 1,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 1180,
+        "wires": [
+            [
+                "4ed0aad22b9012dc"
+            ]
+        ]
+    },
+    {
+        "id": "4ed0aad22b9012dc",
+        "type": "mysql",
+        "z": "5f45bc47afcd40d8",
+        "mydb": "c5ee7d10.742bd",
+        "name": "AutoBud DB",
+        "x": 550,
+        "y": 1180,
+        "wires": [
+            [
+                "49049103998eb92d"
+            ]
         ]
     },
     {
@@ -12858,9 +13229,9 @@
                 "vt": "str"
             }
         ],
-        "repeat": "14400",
+        "repeat": "21600",
         "crontab": "",
-        "once": true,
+        "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
@@ -12952,7 +13323,7 @@
         "z": "266db1b6ba179fe1",
         "name": "",
         "group": "55027fd8cea7fc61",
-        "order": 5,
+        "order": 6,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -13024,7 +13395,7 @@
         "z": "266db1b6ba179fe1",
         "name": "",
         "group": "55027fd8cea7fc61",
-        "order": 6,
+        "order": 5,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -13060,9 +13431,9 @@
                 "vt": "str"
             }
         ],
-        "repeat": "259200",
+        "repeat": "28800",
         "crontab": "",
-        "once": true,
+        "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
@@ -13132,26 +13503,6 @@
         "wires": []
     },
     {
-        "id": "8bb9c05edce3ce60",
-        "type": "comment",
-        "z": "266db1b6ba179fe1",
-        "name": "Soil Moisture 2",
-        "info": "http://192.168.3.16/",
-        "x": 330,
-        "y": 640,
-        "wires": []
-    },
-    {
-        "id": "e9a99de561485e35",
-        "type": "comment",
-        "z": "266db1b6ba179fe1",
-        "name": "Soil Moisture 7",
-        "info": "http://192.168.1.156/",
-        "x": 340,
-        "y": 680,
-        "wires": []
-    },
-    {
         "id": "73e53280c7bc6c8f",
         "type": "ui_text",
         "z": "266db1b6ba179fe1",
@@ -13183,6 +13534,192 @@
         "className": "",
         "x": 690,
         "y": 360,
+        "wires": []
+    },
+    {
+        "id": "b710d08a71a56972",
+        "type": "ui_button",
+        "z": "266db1b6ba179fe1",
+        "name": "",
+        "group": "55027fd8cea7fc61",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Water ON",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#0EFA10 ",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 520,
+        "y": 540,
+        "wires": [
+            [
+                "96ba323d5be9e3f6"
+            ]
+        ]
+    },
+    {
+        "id": "96ba323d5be9e3f6",
+        "type": "http request",
+        "z": "266db1b6ba179fe1",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.0.14/cm?cmnd=Power%20on",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 710,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "45db7680e76e6a33",
+        "type": "http request",
+        "z": "266db1b6ba179fe1",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.0.14/cm?cmnd=Power%20off",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 710,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a8c518936c769fb3",
+        "type": "ui_button",
+        "z": "266db1b6ba179fe1",
+        "name": "",
+        "group": "55027fd8cea7fc61",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Water OFF",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#FA370E",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 510,
+        "y": 620,
+        "wires": [
+            [
+                "45db7680e76e6a33"
+            ]
+        ]
+    },
+    {
+        "id": "f544ac0f1fa31534",
+        "type": "inject",
+        "z": "266db1b6ba179fe1",
+        "name": "Every 72 Hours",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "86400",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 340,
+        "y": 560,
+        "wires": [
+            [
+                "96ba323d5be9e3f6",
+                "2dfd899a8c28d418"
+            ]
+        ]
+    },
+    {
+        "id": "2dfd899a8c28d418",
+        "type": "delay",
+        "z": "266db1b6ba179fe1",
+        "name": "Run Time",
+        "pauseType": "delay",
+        "timeout": "30",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 520,
+        "y": 580,
+        "wires": [
+            [
+                "45db7680e76e6a33"
+            ]
+        ]
+    },
+    {
+        "id": "4603d76455ae6698",
+        "type": "comment",
+        "z": "266db1b6ba179fe1",
+        "name": "Relay: 0.14",
+        "info": "",
+        "x": 160,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "d1b4ed070ee3cd5b",
+        "type": "ui_text",
+        "z": "266db1b6ba179fe1",
+        "group": "55027fd8cea7fc61",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Relay 0.14",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 710,
+        "y": 520,
         "wires": []
     }
 ]
